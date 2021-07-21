@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WpfMatrixMultiplicator.Commands.Base;
+using WpfMatrixMultiplicator.Models;
 using WpfMatrixMultiplicator.ViewModels.Base;
 
 namespace WpfMatrixMultiplicator.ViewModels
@@ -18,6 +19,9 @@ namespace WpfMatrixMultiplicator.ViewModels
 
         private string _matrixAPath = _noFile;
         private string _matrixBPath = _noFile;
+
+        private Matrix _matrixA;
+        private Matrix _matrixB;
 
         public string MatrixAPath
         {
@@ -44,10 +48,12 @@ namespace WpfMatrixMultiplicator.ViewModels
                 if (MatrixIdentifier.Equals("A"))
                 {
                     MatrixAPath = GetPathFromFileDialog();
+                    _matrixA = MatrixAPath.Equals(_noFile) ? null : new Matrix(MatrixAPath);
                 }
                 else
                 {
                     MatrixBPath = GetPathFromFileDialog();
+                    _matrixB = MatrixBPath.Equals(_noFile) ? null : new Matrix(MatrixBPath);
                 }
             }
             catch

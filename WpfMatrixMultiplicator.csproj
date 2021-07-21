@@ -66,6 +66,8 @@
     </Compile>
     <Compile Include="Commands\Base\Command.cs" />
     <Compile Include="Commands\LambdaCommand.cs" />
+    <Compile Include="Models\Matrix.cs" />
+    <Compile Include="Services\MatrixService.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\Windows\MainWindow.xaml.cs">
@@ -99,8 +101,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

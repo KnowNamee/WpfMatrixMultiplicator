@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WpfMatrixMultiplicator.Services;
+
+namespace WpfMatrixMultiplicator.Models
+{
+    internal class Matrix
+    {
+        private int _sizeI;
+        private int _sizeJ;
+        private int[,] _matrix;
+
+        public int sizeI
+        {
+            get => _sizeI;
+            set => _sizeI = value;
+        }
+        public int sizeJ
+        {
+            get => _sizeJ;
+            set => _sizeJ = value;
+        }
+        public int[,] matrix
+        {
+            get => _matrix;
+            set => _matrix = value;
+        }
+
+        public Matrix(string filePath)
+        {
+            MatrixService.Read(this, filePath);
+        }
+    }
+}
