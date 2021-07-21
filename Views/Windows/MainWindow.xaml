@@ -93,6 +93,8 @@
                 </Border>
                 <Button Grid.Row="2" Grid.ColumnSpan="2" Margin="5 10 10 10"
                         Style="{StaticResource ButtonStyle}"
+                        Command="{Binding ClearCommand}"
+                        CommandParameter="A"
                         Content="Clear"/>
                 <Button Grid.Row="3" Grid.ColumnSpan="2" Margin="5 10 10 10"
                         Style="{StaticResource ButtonStyle}"
@@ -132,6 +134,8 @@
                 </Border>
                 <Button Grid.Row="2" Grid.ColumnSpan="2" Margin="5 10 10 10"
                         Style="{StaticResource ButtonStyle}"
+                        Command="{Binding ClearCommand}"
+                        CommandParameter="B"
                         Content="Clear"/>
                 <Button Grid.Row="3" Grid.ColumnSpan="2" Margin="5 10 10 10"
                         Style="{StaticResource ButtonStyle}"

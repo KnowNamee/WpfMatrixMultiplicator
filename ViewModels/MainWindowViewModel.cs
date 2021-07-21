@@ -44,12 +44,10 @@ namespace WpfMatrixMultiplicator.ViewModels
                 if (MatrixIdentifier.Equals("A"))
                 {
                     MatrixAPath = GetPathFromFileDialog();
-                    Console.WriteLine(MatrixAPath);
                 }
                 else
                 {
                     MatrixBPath = GetPathFromFileDialog();
-                    Console.WriteLine(MatrixBPath);
                 }
             }
             catch
@@ -58,7 +56,32 @@ namespace WpfMatrixMultiplicator.ViewModels
             }
         }
 
-        private bool CanOpenMatrixCommandExecute(object Obj) => true;
+        #endregion
+
+        #region ClearCommand
+
+        public ICommand ClearCommand { get; }
+
+        private void OnClearCommandExecuted(object Obj)
+        {
+            try
+            {
+                string MatrixIdentifier = (string)Convert.ChangeType(Obj, typeof(string));
+                if (MatrixIdentifier.Equals("A"))
+                {
+                    MatrixAPath = null;
+                }
+                else
+                {
+                    MatrixBPath = null;
+                }
+            }
+            catch
+            {
+                Console.Error.WriteLine("Error: OnClearCommandExecuted");
+            }
+        }
+
         #endregion
 
         #endregion
@@ -67,7 +90,8 @@ namespace WpfMatrixMultiplicator.ViewModels
         {
             #region Commands
 
-            OpenMatrixCommand = new LambdaCommand(OnOpenMatrixCommandExecuted, CanOpenMatrixCommandExecute);
+            OpenMatrixCommand = new LambdaCommand(OnOpenMatrixCommandExecuted);
+            ClearCommand = new LambdaCommand(OnClearCommandExecuted);
 
             #endregion
         }
