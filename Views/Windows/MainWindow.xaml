@@ -44,18 +44,10 @@
         </Style>
     </Window.Resources>
     <DockPanel>
-        <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem>
-                <TextBlock>Какой-то текст 1</TextBlock>
-            </StatusBarItem>
-            <Separator Width="1"/>
-            <StatusBarItem>
-                <ProgressBar Width="150" Height="15" Value="30" />
-            </StatusBarItem>
-        </StatusBar>
         <Button DockPanel.Dock="Bottom"
                 Margin="0 20"
                 Style="{StaticResource ButtonStyle}"
+                Command="{Binding MultiplyCommand}"
                 Content="Multiply"/>
         <Grid x:Name="MainGridLayout">
             <Grid.ColumnDefinitions>

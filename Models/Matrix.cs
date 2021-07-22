@@ -30,6 +30,13 @@ namespace WpfMatrixMultiplicator.Models
             set => _matrix = value;
         }
 
+        public Matrix(int sizeI, int sizeJ)
+        {
+            _sizeI = sizeI;
+            _sizeJ = sizeJ;
+            _matrix = new int[_sizeI, _sizeJ];
+        }
+
         public Matrix(string filePath)
         {
             MatrixService.Read(this, filePath);

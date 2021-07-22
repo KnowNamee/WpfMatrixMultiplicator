@@ -9,6 +9,7 @@ using System.Windows.Input;
 using WpfMatrixMultiplicator.Commands.Base;
 using WpfMatrixMultiplicator.Models;
 using WpfMatrixMultiplicator.ViewModels.Base;
+using WpfMatrixMultiplicator.Services;
 
 namespace WpfMatrixMultiplicator.ViewModels
 {
@@ -22,6 +23,7 @@ namespace WpfMatrixMultiplicator.ViewModels
 
         private Matrix _matrixA;
         private Matrix _matrixB;
+        private Matrix _result;
 
         public string MatrixAPath
         {
@@ -90,6 +92,26 @@ namespace WpfMatrixMultiplicator.ViewModels
 
         #endregion
 
+        #region MultiplyCommand
+
+        public ICommand MultiplyCommand { get; }
+
+        private void OnMultiplyCommandExecuted(object obj)
+        {
+            _result = MatrixService.Multiply(_matrixA, _matrixB, Environment.ProcessorCount);
+            for (int i = 0; i < _result.sizeI; ++i)
+            {
+                for (int j = 0; j < _result.sizeJ; ++j)
+                {
+                    Console.Write(_result.matrix[i, j]);
+                    Console.Write(' ');
+                }
+                Console.Write('\n');
+            }
+        }
+
+        #endregion
+
         #endregion
 
         public MainWindowViewModel()
@@ -98,6 +120,7 @@ namespace WpfMatrixMultiplicator.ViewModels
 
             OpenMatrixCommand = new LambdaCommand(OnOpenMatrixCommandExecuted);
             ClearCommand = new LambdaCommand(OnClearCommandExecuted);
+            MultiplyCommand = new LambdaCommand(OnMultiplyCommandExecuted);
 
             #endregion
         }
