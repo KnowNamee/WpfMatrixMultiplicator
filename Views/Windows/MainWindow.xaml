@@ -44,6 +44,11 @@
         </Style>
     </Window.Resources>
     <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Text="{Binding statusText}"/>
+            </StatusBarItem>
+        </StatusBar>
         <Button DockPanel.Dock="Bottom"
                 Margin="0 20"
                 Style="{StaticResource ButtonStyle}"

@@ -15,11 +15,13 @@ namespace WpfMatrixMultiplicator.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
-        private static string _noFile = "No file";
-        private static string _openFileFormats = "txt files (*.txt)|*.txt|csv files (*.csv)|*.csv";
+        private static readonly string _noFile = "No file";
+        private static readonly string _openFileFormats = "txt files (*.txt)|*.txt|csv files (*.csv)|*.csv";
+        private static readonly string _startStatusText = "Waiting for opened files.";
 
         private string _matrixAPath = _noFile;
         private string _matrixBPath = _noFile;
+        private string _statusText = _startStatusText;
 
         private Matrix _matrixA;
         private Matrix _matrixB;
@@ -37,6 +39,12 @@ namespace WpfMatrixMultiplicator.ViewModels
             set => Set(ref _matrixBPath, value ?? _noFile);
         }
 
+        public string statusText
+        {
+            set => Set(ref _statusText, value);
+            get => _statusText;
+        }
+
         #region Commands
 
         #region OpenMatrixCommand
@@ -51,11 +59,13 @@ namespace WpfMatrixMultiplicator.ViewModels
                 {
                     MatrixAPath = GetPathFromFileDialog();
                     _matrixA = MatrixAPath.Equals(_noFile) ? null : new Matrix(MatrixAPath);
+                    statusText = $"File opened : {MatrixAPath}";
                 }
                 else
                 {
                     MatrixBPath = GetPathFromFileDialog();
                     _matrixB = MatrixBPath.Equals(_noFile) ? null : new Matrix(MatrixBPath);
+                    statusText = $"File opened : {MatrixBPath}";
                 }
             }
             catch
@@ -75,14 +85,16 @@ namespace WpfMatrixMultiplicator.ViewModels
             try
             {
                 string MatrixIdentifier = (string)Convert.ChangeType(Obj, typeof(string));
+                
                 if (MatrixIdentifier.Equals("A"))
                 {
                     MatrixAPath = null;
                 }
                 else
                 {
-                    MatrixBPath = null;
+                    MatrixBPath = null;    
                 }
+                statusText = $"Matrix {MatrixIdentifier} cleared.";
             }
             catch
             {
@@ -99,7 +111,9 @@ namespace WpfMatrixMultiplicator.ViewModels
         private void OnMultiplyCommandExecuted(object obj)
         {
             // !!! Blocking Multiply Call
+            statusText = "Multiplying . . .";
             _result = MatrixService.Multiply(_matrixA, _matrixB, Environment.ProcessorCount);
+            statusText = "Multiplying finished.";
         }
 
         #endregion
@@ -114,6 +128,7 @@ namespace WpfMatrixMultiplicator.ViewModels
             if ((bool)dialog.ShowDialog() && _result != null)
             {
                 MatrixService.Save(_result, dialog.FileName);
+                statusText = "Result saved successfully.";
             }
         }
 
