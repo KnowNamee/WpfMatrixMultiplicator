@@ -68,7 +68,6 @@
                     <RowDefinition />
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
@@ -92,9 +91,6 @@
                         Command="{Binding ClearCommand}"
                         CommandParameter="A"
                         Content="Clear"/>
-                <Button Grid.Row="3" Grid.ColumnSpan="2" Margin="5 10 10 10"
-                    Style="{StaticResource ButtonStyle}"
-                    Content="Copy Path"/>
             </Grid>
             <Grid x:Name="MatrixBGridLayout" Grid.Column="1" Margin="30 30 30 0">
                 <Grid.ColumnDefinitions>
@@ -103,7 +99,6 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition />
-                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition />
@@ -129,9 +124,6 @@
                         Command="{Binding ClearCommand}"
                         CommandParameter="B"
                         Content="Clear"/>
-                <Button Grid.Row="3" Grid.ColumnSpan="2" Margin="5 10 10 10"
-                    Style="{StaticResource ButtonStyle}"
-                    Content="Copy Path"/>
             </Grid>
         </Grid>
     </DockPanel>
