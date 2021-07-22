@@ -104,6 +104,21 @@ namespace WpfMatrixMultiplicator.ViewModels
 
         #endregion
 
+        #region SaveCommand
+
+        public ICommand SaveCommand { get; }
+
+        private void OnSaveCommandExecuted(object obj)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            if ((bool)dialog.ShowDialog() && _result != null)
+            {
+                MatrixService.Save(_result, dialog.FileName);
+            }
+        }
+
+        #endregion
+
         #endregion
 
         public MainWindowViewModel()
@@ -113,6 +128,7 @@ namespace WpfMatrixMultiplicator.ViewModels
             OpenMatrixCommand = new LambdaCommand(OnOpenMatrixCommandExecuted);
             ClearCommand = new LambdaCommand(OnClearCommandExecuted);
             MultiplyCommand = new LambdaCommand(OnMultiplyCommandExecuted);
+            SaveCommand = new LambdaCommand(OnSaveCommandExecuted);
 
             #endregion
         }

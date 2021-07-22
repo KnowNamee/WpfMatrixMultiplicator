@@ -53,6 +53,24 @@ namespace WpfMatrixMultiplicator.Services
             fs.Close();
         }
 
+        public static void Save(Matrix matrix, string path, char splitter = ' ')
+        {
+            FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+            using (StreamWriter writer = new StreamWriter(fs))
+            {
+                writer.WriteLine($"{matrix.sizeI}{splitter}{matrix.sizeJ}");
+                for (int i = 0; i < matrix.sizeI; ++i)
+                {
+                    for (int j = 0; j + 1 < matrix.sizeJ; ++j)
+                    {
+                        writer.Write($"{matrix.matrix[i, j]}{splitter}");
+                    }
+                    writer.Write($"{matrix.matrix[i, matrix.sizeJ - 1]}\n");
+                }
+            }
+            fs.Close();
+        }
+
         public static Matrix Multiply(Matrix lhs, Matrix rhs, int concurrency = 1)
         {
             if (lhs == null || rhs == null)
