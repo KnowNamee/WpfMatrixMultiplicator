@@ -98,16 +98,8 @@ namespace WpfMatrixMultiplicator.ViewModels
 
         private void OnMultiplyCommandExecuted(object obj)
         {
+            // !!! Blocking Multiply Call
             _result = MatrixService.Multiply(_matrixA, _matrixB, Environment.ProcessorCount);
-            for (int i = 0; i < _result.sizeI; ++i)
-            {
-                for (int j = 0; j < _result.sizeJ; ++j)
-                {
-                    Console.Write(_result.matrix[i, j]);
-                    Console.Write(' ');
-                }
-                Console.Write('\n');
-            }
         }
 
         #endregion
